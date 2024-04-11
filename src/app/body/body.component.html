@@ -1,1 +1,5 @@
-<p>body works!</p>
+<div class="body" [ngClass]="getBodyClass()">
+  <router-outlet></router-outlet>
+  <p>{{ screenWidth }}</p>
+  <p>{{ collapsed }}</p>
+</div>
