@@ -1,1 +1,36 @@
-<p>signup works!</p>
+<div class="signup-form">
+  <div class="signup-inner-container">
+    <div class="signup-form-items">
+      <h1
+        [@myTrigger]="TextVisible ? 'visible' : 'hidden'"
+        [ngClass]="Status == 'User Added!' ? 'text-info' : ''"
+      >
+        {{ Status }}
+      </h1>
+      <form [formGroup]="form" class="form-sign">
+        <div class="signup-input">
+          <input type="text" formControlName="name" placeholder="Name :" />
+          <div
+            *ngIf="
+              form.controls['name'].invalid && form.controls['name'].touched
+            "
+            class="text-danger"
+          >
+            This field is required.
+          </div>
+        </div>
+
+        <div class="signup-input">
+          <input type="number" formControlName="age" placeholder="Age :" />
+          <div
+            *ngIf="form.controls['age'].invalid && form.controls['age'].touched"
+            class="text-danger"
+          >
+            This field is required.
+          </div>
+        </div>
+        <button type="submit" (click)="pushToArray()">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

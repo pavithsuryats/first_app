@@ -1,1 +1,56 @@
-<p>update works!</p>
+<div class="update-form">
+  <div class="update-inner-container">
+    <div class="update-form-items">
+      <h1
+        [@myTrigger]="TextVisible ? 'visible' : 'hidden'"
+        [ngClass]="Status == 'User Not Found!' ? 'text-danger' : ''"
+        [ngClass]="
+          Status == 'User Found!' || Status == 'User Updated!'
+            ? 'text-info'
+            : ''
+        "
+      >
+        {{ Status }}
+      </h1>
+      <form [formGroup]="form" class="form-sign">
+        <div class="update-input">
+          <input
+            type="text"
+            formControlName="id"
+            (input)="makeChanges($event)"
+            placeholder="ID :"
+          />
+          <div
+            *ngIf="form.controls['id'].invalid && form.controls['id'].touched"
+            class="text-danger"
+          >
+            This field is required.
+          </div>
+        </div>
+
+        <div class="update-input">
+          <input type="text" formControlName="name" placeholder="Name :" />
+          <div
+            *ngIf="
+              form.controls['name'].invalid && form.controls['name'].touched
+            "
+            class="text-danger"
+          >
+            This field is required.
+          </div>
+        </div>
+
+        <div class="update-input">
+          <input type="number" formControlName="age" placeholder="Age :" />
+          <div
+            *ngIf="form.controls['age'].invalid && form.controls['age'].touched"
+            class="text-danger"
+          >
+            This field is required.
+          </div>
+        </div>
+        <button type="submit" (click)="pushUpdateToArray()">Update</button>
+      </form>
+    </div>
+  </div>
+</div>

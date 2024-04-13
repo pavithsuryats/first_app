@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { BodyComponent } from './body/body.component';
+import { userData } from './user-data';
 
 interface SideNavToggle {
   screenWidth: number;
