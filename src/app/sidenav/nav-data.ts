@@ -2,12 +2,12 @@ export const navbarData = [
   {
     routeLink: 'dashboard',
     icon: 'fa fa-home',
-    label: 'DashBoard',
+    label: 'Dashboard',
   },
   {
     routeLink: 'registration',
     icon: 'fa fa-pencil-square-o',
-    label: 'SignUp',
+    label: 'Signup',
   },
   {
     routeLink: 'update',

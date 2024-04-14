@@ -1,0 +1,8 @@
+<div class="user-row" [ngClass]="heading ? 'heading' : 'normal'">
+  <div *ngIf="heading == false" class="col id">{{ id }}</div>
+  <div *ngIf="heading == true" class="col">ID</div>
+  <div *ngIf="heading == false" class="col name">{{ name }}</div>
+  <div *ngIf="heading == true" class="col">Name</div>
+  <div *ngIf="heading == false" class="col age">{{ age }}</div>
+  <div *ngIf="heading == true" class="col">Age</div>
+</div>

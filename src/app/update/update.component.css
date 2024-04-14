@@ -13,6 +13,8 @@
     align-items: center;
     height: 75%;
     width: 75%;
+    min-width: 20rem;
+    min-height: 25rem;
     background: #263138;
 
     .update-input {
@@ -39,7 +41,8 @@
       padding: 0.613rem;
     }
 
-    input:hover {
+    input:hover,
+    button:hover {
       background-color: #fff;
     }
 
@@ -48,7 +51,7 @@
     }
 
     button {
-      background: #fff;
+      background: lightgray;
       text-align: center;
       width: 6rem;
       min-width: 6rem;

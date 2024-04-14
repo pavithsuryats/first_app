@@ -1,1 +1,41 @@
-<p>dashboard works!</p>
+<div class="dashboard-form">
+  <div class="row">
+    <h1 class="col-sm" [@myTrigger]="TextVisible ? 'visible' : 'hidden'">
+      {{ Status }}
+    </h1>
+    <div class="col-sm user-count">
+      <div class="user-count-inner">
+        User Count
+        <div class="inner" *ngIf="user.length > 0">{{ user.length }}</div>
+        <i class="fa fa-smile-o" *ngIf="user.length < 1"></i>
+      </div>
+    </div>
+    <div class="col-sm age-mean">
+      <div class="age-mean-inner">
+        <div class="inner-text">Age Mean</div>
+        <div class="inner" *ngIf="ageMean > 0">{{ ageMean }}</div>
+        <i class="fa fa-smile-o" *ngIf="isNan(ageMean)"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-inner-container">
+    <div class="dashboard-form-items">
+      <div class="heading">
+        <app-user-row [heading]="true"></app-user-row>
+      </div>
+
+      <div class="nouser" *ngIf="user.length == 0">No users here!</div>
+
+      <ul *ngIf="user.length > 0">
+        <li *ngFor="let item of user">
+          <app-user-row
+            [id]="item.id"
+            [name]="item.name"
+            [age]="item.age"
+          ></app-user-row>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

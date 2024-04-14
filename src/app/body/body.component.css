@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   width: calc(100% - 5rem);
-  height: 100vh;
+  min-height: 100vh;
   margin-left: 5rem;
   z-index: 0;
   position: relative;
@@ -10,6 +10,7 @@
   transition: all 0.5s ease;
   background: #f4f7fa;
   padding: 3rem;
+  height: fit-content;
 }
 
 .body-trimmed {
