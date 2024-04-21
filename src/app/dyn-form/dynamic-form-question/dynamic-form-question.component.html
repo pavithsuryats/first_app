@@ -1,0 +1,12 @@
+<div [formGroup]="form">
+  <input
+    [placeholder]="question.label"
+    [formControlName]="question.key"
+    [id]="question.key"
+    [type]="question.type"
+  />
+</div>
+
+<div class="errorMessage" class="text-danger" *ngIf="isValid">
+  {{ question.label }} is required
+</div>

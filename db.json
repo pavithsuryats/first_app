@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Sangavi Pavith",
+      "age": 12
+    },
+    {
+      "id": 2,
+      "name": "Sangavi Pavith",
+      "age": 33
+    },
+    {
+      "id": 3,
+      "name": "Pavi Su",
+      "age": 33
+    },
+    {
+      "id": 4,
+      "name": "Pavith",
+      "age": 22
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 .body {
   display: flex;
   justify-content: center;
-  width: calc(100% - 5rem);
+  width: calc(100%);
   min-height: 100vh;
-  margin-left: 5rem;
+  margin-left: 0;
   z-index: 0;
   position: relative;
   top: 0;
@@ -11,14 +11,4 @@
   background: #f4f7fa;
   padding: 3rem;
   height: fit-content;
-}
-
-.body-trimmed {
-  width: calc(100% - 15rem);
-  margin-left: 15rem;
-}
-
-.body-md-screen {
-  width: calc(100% - 5rem);
-  margin-left: 5rem;
 }

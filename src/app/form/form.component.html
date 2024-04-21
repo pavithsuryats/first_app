@@ -1,0 +1,42 @@
+<div class="form-form">
+  <div class="form-inner-container">
+    <div class="form-form-items">
+      <h1
+        [@myTrigger]="TextVisible ? 'visible' : 'hidden'"
+        [ngClass]="
+          Status == 'User Found!' ||
+          Status == 'User Added!' ||
+          Status == 'User Updated!'
+            ? 'text-info'
+            : ''
+        "
+        [ngClass]="Status == 'User Not Found!' ? 'text-danger' : ''"
+      >
+        {{ Status }}
+      </h1>
+      <div>
+        <form
+          [formGroup]="form"
+          class="form-sign"
+          (input)="Page == 'update' ? makeChanges($event) : ''"
+        >
+          <div *ngFor="let question of questions" class="form-input">
+            <app-question [question]="question" [form]="form"></app-question>
+          </div>
+
+          <div class="form-row">
+            <button
+              type="submit"
+              (click)="
+                Status == 'Sign Up' ? pushToArray() : pushUpdateToArray()
+              "
+              [disabled]="!form.valid"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

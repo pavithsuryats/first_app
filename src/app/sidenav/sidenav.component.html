@@ -1,10 +1,7 @@
-<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
+<div class="sidenav" [ngClass]="getClass()">
   <div class="logo-container">
-    <button class="logo" (click)="toggleCollapse()">MT</button>
+    <button class="logo">MT</button>
     <div class="logo-text" @fadeInOut *ngIf="collapsed">Mettler Toledo</div>
-    <button class="bt-close" @rotate *ngIf="collapsed" (click)="closeSideNav()">
-      <i class="fa fa-times"></i>
-    </button>
   </div>
   <ul class="sidenav-nav">
     <li class="sidenav-nav-item" *ngFor="let item of navData">

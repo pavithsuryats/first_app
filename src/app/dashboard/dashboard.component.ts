@@ -5,18 +5,25 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { userData } from '../user-data';
-import { UserRowComponent } from '../user-row/user-row.component';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { interval } from 'rxjs';
+import { UserService } from '../user.service';
+import { SimpleModalService } from 'ngx-simple-modal';
+import { InfoComponent } from '../Modals/info.component';
+import { ConfirmComponent } from '../Modals/confirm.component';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-dashboard',
-  standalone: true,
-  imports: [CommonModule, UserRowComponent],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
+  styleUrls: ['./dashboard.component.css'],
   animations: [
     trigger('myTrigger', [
       state('visible', style({ opacity: 1 })),
@@ -25,9 +32,9 @@ import { interval } from 'rxjs';
     ]),
   ],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
   ageMean = 0;
-  user = userData;
+  user: { id: number; name: string; age: number }[] = [];
   Status = 'Bonjour ✨';
   TextVisible = true;
   index = 0;
@@ -58,8 +65,49 @@ export class DashboardComponent implements OnInit {
     }, 1500);
   }
 
+  constructor(
+    private userService: UserService,
+    private SimpleModalService: SimpleModalService
+  ) {}
+
+  @ViewChild('ngxDatatable') ngxDatatable: DatatableComponent;
+
+  showInfo(obj: any) {
+    this.SimpleModalService.addModal(InfoComponent, {
+      title: 'User Information',
+      id: obj.id,
+      name: obj.name,
+      age: obj.age,
+    });
+  }
+
+  showConfirm(id: number) {
+    this.SimpleModalService.addModal(ConfirmComponent, {
+      title: 'Confirm Delete',
+      message: 'Are you sure want to delete?',
+    }).subscribe((isConfirmed) => {
+      if (isConfirmed) {
+        this.userService.deleteUser(id).subscribe();
+        setTimeout(() => {
+          this.refreshList();
+          this.user = [...this.user];
+        }, 100);
+      }
+    });
+  }
+
+  refreshList() {
+    this.userService.getUsersList().subscribe((data) => {
+      this.user = data;
+      this.updateAgeMean();
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.refreshList();
+  }
+
   ngOnInit(): void {
-    this.updateAgeMean();
     interval(this.interval).subscribe((x) => {
       this.toggleVisibility();
     });
@@ -77,5 +125,6 @@ export class DashboardComponent implements OnInit {
       index += 1;
     }
     this.ageMean /= index;
+    this.ageMean = Number(this.ageMean.toFixed(2));
   }
 }

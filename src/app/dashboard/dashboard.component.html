@@ -20,22 +20,45 @@
   </div>
 
   <div class="dashboard-inner-container">
-    <div class="dashboard-form-items">
-      <div class="heading">
-        <app-user-row [heading]="true"></app-user-row>
-      </div>
-
-      <div class="nouser" *ngIf="user.length == 0">No users here!</div>
-
-      <ul *ngIf="user.length > 0">
-        <li *ngFor="let item of user">
-          <app-user-row
-            [id]="item.id"
-            [name]="item.name"
-            [age]="item.age"
-          ></app-user-row>
-        </li>
-      </ul>
-    </div>
+    <ngx-datatable
+      class="material container striped"
+      [rows]="user"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      rowHeight="auto"
+    >
+      <ngx-datatable-column name="ID" [flexGrow]="1">
+        <ng-template
+          let-rowIndex="rowIndex"
+          let-row="row"
+          ngx-datatable-cell-template
+        >
+          {{ row.id }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Name" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.name | titlecase }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Age" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.age }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" [flexGrow]="0.4">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button
+            (click)="showInfo({ id: row.id, name: row.name, age: row.age })"
+          >
+            <i class="fa fa-info-circle text-primary"></i>
+          </button>
+          <button (click)="showConfirm(row.id)">
+            <i class="fa fa-trash-o text-danger"></i>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
   </div>
 </div>

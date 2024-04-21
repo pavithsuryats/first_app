@@ -1,29 +1,24 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { SidenavComponent } from './sidenav/sidenav.component';
-import { BodyComponent } from './body/body.component';
-import { userData } from './user-data';
-
-interface SideNavToggle {
-  screenWidth: number;
-  collapsed: boolean;
-}
+import { Component, OnInit } from '@angular/core';
+import { IOutputData, SplitAreaDirective, SplitComponent } from 'angular-split';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, SidenavComponent, BodyComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  leftSize: number = 5;
+  rightSize: number = 95;
+
   title = 'myApp';
 
   isSideNavCollapsed = false;
   screenWidth = 0;
+  leftscreensize = 0;
+  rightscreensize = 0;
 
-  onToggleSideNav(data: SideNavToggle): void {
-    this.isSideNavCollapsed = data.collapsed;
-    this.screenWidth = data.screenWidth;
+  onDrag(event: IOutputData): void {
+    this.leftscreensize = Number(event.sizes[0]);
+    this.rightscreensize = Number(event.sizes[1]);
   }
 }
